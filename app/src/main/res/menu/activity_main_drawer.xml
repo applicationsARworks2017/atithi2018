@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        <group android:checkableBehavior="single">
+    --><item android:title="">
+    <menu>
+        <item
+            android:id="@+id/nav_home"
+            android:iconTint="@color/colorPrimary"
+            android:icon="@mipmap/ic_person_add_black_24dp"
+            android:title="Guests" />
+        <item
+            android:id="@+id/nav_checkout"
+            android:title="Not Check-Out"
+            android:icon="@mipmap/ic_exit_to_app_black_24dp"
+            android:iconTint="@color/colorPrimary"/>
+        <item
+            android:id="@+id/nav_expenses"
+            android:title="Expenses"
+            android:icon="@mipmap/ic_account_balance_wallet_black_24dp"
+            android:iconTint="@color/colorPrimary"/>
+        <item
+            android:id="@+id/nav_support"
+            android:title="Profile &amp; Support"
+            android:icon="@mipmap/ic_account_circle_black_24dp"
+            android:iconTint="@color/colorPrimary"/>
+    </menu>
+</item>
+</menu>
+
+
+
