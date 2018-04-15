@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/login_rel"
     android:background="@drawable/gradient_color"
     tools:context="com.mars.myguest.Activity.LoginActivity">
     <RelativeLayout
@@ -23,6 +24,9 @@
             android:layout_marginRight="40dp"
             android:layout_marginLeft="10dp"
             android:id="@+id/username"
+            android:maxLength="10"
+            android:inputType="phone"
+            android:singleLine="true"
             android:layout_marginTop="20dp"
             android:hint="Mobile Number"/>
         <EditText
@@ -32,6 +36,9 @@
             android:layout_marginLeft="10dp"
             android:layout_below="@id/username"
             android:id="@+id/password"
+            android:singleLine="true"
+            android:inputType="number"
+            android:maxLength="6"
             android:hint="Login Pin"/>
 
     </RelativeLayout>

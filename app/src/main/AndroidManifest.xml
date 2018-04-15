@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mars.myguest">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -10,6 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.Register" />
+        <activity android:name=".Activity.WaitingPage" />
+        <activity
+            android:name=".Activity.Home"
+            android:label="Today&apos;s Guest">
 
             <!--
             <intent-filter>
@@ -19,22 +34,17 @@
             </intent-filter>
             -->
         </activity>
-        <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.Register" />
-        <activity android:name=".Activity.WaitingPage" />
         <activity
-            android:name=".Activity.Home"
-            android:label="Today&apos;s Guest">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".Activity.NewGuestEntry"
+            android:name=".Activity.NewGuestEntry"
             android:label="New Guest Details"
             android:parentActivityName=".Activity.Home"
-            android:theme="@style/AppThemetwo"></activity>
+            android:theme="@style/AppThemetwo" />
+        <activity android:name=".Activity.SuperadminDashboard"
+            android:theme="@style/AppThemetwo"
+            android:label="My Dashboard"/>
+        <activity android:name=".Activity.AdminDashboard"
+            android:theme="@style/AppThemetwo"
+            android:label="Atithi"></activity>
     </application>
 
 </manifest>
