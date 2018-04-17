@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/rel_register"
     android:background="@drawable/gradient_color"
     tools:context="com.mars.myguest.Activity.LoginActivity">
     <RelativeLayout

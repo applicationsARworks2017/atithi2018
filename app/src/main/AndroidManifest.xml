@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -12,6 +15,15 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <provider
+            android:name="com.mars.myguest.Util.GenericFileProvider"
+            android:authorities="com.mars.myguest"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,12 +51,22 @@
             android:label="New Guest Details"
             android:parentActivityName=".Activity.Home"
             android:theme="@style/AppThemetwo" />
-        <activity android:name=".Activity.SuperadminDashboard"
+        <activity
+            android:name=".Activity.SuperadminDashboard"
+            android:label="My Dashboard"
+            android:theme="@style/AppThemetwo" />
+        <activity
+            android:name=".Activity.AdminDashboard"
+            android:label="Atithi"
+            android:theme="@style/AppThemetwo" />
+        <activity
+            android:name=".Activity.ProfileSA"
+            android:label="Profile"
+            android:parentActivityName=".Activity.SuperadminDashboard"
+            android:theme="@style/AppThemetwo" />
+        <activity android:name=".Activity.AddNewHotel"
             android:theme="@style/AppThemetwo"
-            android:label="My Dashboard"/>
-        <activity android:name=".Activity.AdminDashboard"
-            android:theme="@style/AppThemetwo"
-            android:label="Atithi"></activity>
+            android:parentActivityName=".Activity.SuperadminDashboard"></activity>
     </application>
 
 </manifest>
