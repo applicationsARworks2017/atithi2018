@@ -328,14 +328,24 @@ public class AddNewHotel extends AppCompatActivity {
 
                 /**
                  * {
-                 "passcode": "bf46zk",
-                 "status": 1,
-                 "message": "Successfully added preapproved visitor."
+                 "hotel": {
+                 "name": "gfdsgfdsg",
+                 "address": "gfdgfdggfdg",
+                 "photo": "file15240127551920757733.jpg",
+                 "created": "2018-04-18T00:52:35+00:00",
+                 "modified": "2018-04-18T00:52:35+00:00",
+                 "id": 4
+                 },
+                 "res": {
+                 "message": "The Hotel has been saved.",
+                 "status": 1
+                 }
                  }
                  * */
                 if (res != null && res.length() > 0) {
                     JSONObject ress = new JSONObject(res.trim());
-                    server_status = ress.optInt("status");
+                    JSONObject sec=ress.getJSONObject("res");
+                    server_status = sec.optInt("status");
                     if (server_status == 1) {
                         server_message = ress.optString("message");
                     } else {

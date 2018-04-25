@@ -5,4 +5,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="managehotel">Hotel  &amp; Room List, Set Price, Add Rooms    </string>
+    <string name="manageguest">Guest List with Details    </string>
+    <string name="managereq">Check Special Request &amp; make discount   </string>
+    <string name="managefin">Check Account Details &amp; Verify    </string>
 </resources>

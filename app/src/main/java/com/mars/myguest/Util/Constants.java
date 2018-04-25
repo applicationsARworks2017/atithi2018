@@ -1,10 +1,14 @@
 package com.mars.myguest.Util;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * Created by Amaresh on 4/14/18.
@@ -25,6 +29,8 @@ public class Constants {
     public static String BASEURL="https://a2r.in/atithi/";
     public static String LOGIN="Users/loginCheck.json";
     public static String ADD_HOTEL="Hotels/add.json";
+    public static String HOTELLIST="Hotels/index.json";
+    public static String ADD_USERS="Users/add.json";
 
 
 
@@ -64,5 +70,20 @@ public class Constants {
         Matrix matrix = new Matrix();
         matrix.preScale(horizontal ? -1 : 1, vertical ? -1 : 1);
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+    }
+    public static File bitmaptofile(Bitmap bitmap, String name, Context context) {
+        File filesDir = context.getFilesDir();
+        File imageFile = new File(filesDir, name + ".jpg");
+
+        OutputStream os;
+        try {
+            os = new FileOutputStream(imageFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os);
+            os.flush();
+            os.close();
+        } catch (Exception e) {
+            // Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
+        }
+        return imageFile;
     }
 }

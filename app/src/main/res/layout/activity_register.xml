@@ -9,12 +9,12 @@
     tools:context="com.mars.myguest.Activity.LoginActivity">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="300dp"
         android:id="@+id/main_rel"
         android:layout_centerVertical="true">
         <RelativeLayout
             android:layout_width="300dp"
-            android:layout_height="230dp"
+            android:layout_height="280dp"
             android:id="@+id/rel"
             android:layout_centerVertical="true"
             android:background="@drawable/newline">
@@ -24,6 +24,9 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/username"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:singleLine="true"
                 android:layout_marginTop="20dp"
                 android:hint="Mobile Number"/>
             <EditText
@@ -31,14 +34,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="40dp"
                 android:layout_marginLeft="10dp"
-                android:layout_below="@id/username"
+                android:layout_below="@+id/username"
+                android:id="@+id/name"
+                android:singleLine="true"
+                android:layout_marginTop="10dp"
+                android:hint="Name"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@id/name"
                 android:id="@+id/password"
+                android:inputType="number"
+                android:maxLength="6"
+                android:singleLine="true"
                 android:hint="Login Pin"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="40dp"
                 android:layout_marginLeft="10dp"
+                android:inputType="number"
+                android:maxLength="6"
+                android:singleLine="true"
                 android:layout_below="@id/password"
                 android:id="@+id/cpassword"
                 android:hint="Cofirm Login Pin"/>
@@ -49,6 +68,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_below="@id/cpassword"
                 android:id="@+id/orgname"
+                android:focusable="false"
                 android:hint="Hotel Name"/>
         </RelativeLayout>
         <android.support.design.widget.FloatingActionButton

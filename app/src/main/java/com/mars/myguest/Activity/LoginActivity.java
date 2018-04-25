@@ -111,14 +111,14 @@ public class LoginActivity extends AppCompatActivity {
                     i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(i);
                 }
-                else if(user_type.contentEquals("2")){
+                else if(user_type.contentEquals("3")){
                     Intent i = new Intent(LoginActivity.this, Home.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(i);
                 }
-                else if(user_type.contentEquals("3")){
+                else if(user_type.contentEquals("2")){
                     Intent i = new Intent(LoginActivity.this, AdminDashboard.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

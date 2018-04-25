@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.mars.myguest.Fragment.HomeFragment;
+import com.mars.myguest.Fragment.ProfileSupport;
 import com.mars.myguest.R;
 
 public class Home extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class Home extends AppCompatActivity {
     public static int item_id;
     private static final String TAG_HOME = "Today's Guest";
     private static final String TAG_USERS = "Not Check-Out";
-    private static final String TAG_CATEGORY = "Category List";
+    private static final String TAG_SUPPORT = "Profile & Support";
     public static String CURRENT_TAG = TAG_HOME;
 
 
@@ -112,12 +113,12 @@ public class Home extends AppCompatActivity {
                         item_id = R.id.resident_service;
                         //  navItemIndex = 6;
                         CURRENT_TAG = TAG_SERVICE;
-                        break;
-                    case R.id.resident_support:
-                        item_id = R.id.resident_support;
+                        break;*/
+                    case R.id.nav_support:
+                        item_id = R.id.nav_support;
                         //  navItemIndex = 6;
                         CURRENT_TAG = TAG_SUPPORT;
-                        break;*/
+                        break;
                     default:
                 }
 
@@ -218,11 +219,11 @@ public class Home extends AppCompatActivity {
             case R.id.resident_service:
                 ResidentService serviceprovider = new ResidentService();
                 toolbar.setTitle("My Service Providers");
-                return serviceprovider;
-            case R.id.resident_support:
-                ResidentSupport residentSupport = new ResidentSupport();
-                toolbar.setTitle("Support");
-                return residentSupport;*/
+                return serviceprovider;*/
+            case R.id.nav_support:
+                ProfileSupport residentSupport = new ProfileSupport();
+                toolbar.setTitle("Profile & Support");
+                return residentSupport;
 
             default:
                 return new HomeFragment();

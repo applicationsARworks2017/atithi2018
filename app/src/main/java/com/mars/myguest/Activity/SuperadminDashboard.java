@@ -9,7 +9,7 @@ import android.view.View;
 import com.mars.myguest.R;
 
 public class SuperadminDashboard extends AppCompatActivity {
-    CardView card_profile,card_addhotels;
+    CardView card_profile,card_addhotels,card_allhotels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +17,7 @@ public class SuperadminDashboard extends AppCompatActivity {
         setContentView(R.layout.activity_superadmin_dashboard);
         card_profile=(CardView)findViewById(R.id.card_profile);
         card_addhotels=(CardView)findViewById(R.id.card_addhotels);
+        card_allhotels=(CardView)findViewById(R.id.card_allhotels);
         card_addhotels.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -28,6 +29,14 @@ public class SuperadminDashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(SuperadminDashboard.this,ProfileSA.class);
+                startActivity(intent);
+            }
+        });
+        card_allhotels.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(SuperadminDashboard.this,AllHotels.class);
+                intent.putExtra("PAGE","dashboard");
                 startActivity(intent);
             }
         });
