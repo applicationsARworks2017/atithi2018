@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/linn">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="260dp"
+        android:layout_centerInParent="true"
+        android:background="@color/white">
+    <EditText
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:id="@+id/room_no"
+        android:singleLine="true"
+        android:layout_marginTop="20dp"
+        android:hint="Enter Room No."
+        android:padding="10dp"
+        android:layout_marginLeft="-0dp"
+        android:inputType="number"
+        android:background="@drawable/custom_border"/>
+        <EditText
+            android:id="@+id/room_no_bed"
+            android:layout_below="@+id/room_no"
+            android:layout_width="360dp"
+            android:layout_height="50dp"
+            android:singleLine="true"
+            android:hint="No. of bed"
+            android:padding="10dp"
+            android:layout_marginLeft="-0dp"
+            android:layout_marginTop="10dp"
+            android:inputType="number"
+            android:background="@drawable/custom_border"/>
+        <EditText
+            android:id="@+id/room_price"
+            android:layout_below="@+id/room_no_bed"
+            android:layout_width="360dp"
+            android:layout_height="50dp"
+            android:hint="Room Price"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="-0dp"
+            android:inputType="number"
+            android:background="@drawable/custom_border"/>
+        <Button
+            android:id="@+id/add"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/room_price"
+            android:layout_marginTop="10dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/custom_border1"
+            android:text="Add"/>
+    </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

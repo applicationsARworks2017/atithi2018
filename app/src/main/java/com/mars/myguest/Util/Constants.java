@@ -31,6 +31,9 @@ public class Constants {
     public static String ADD_HOTEL="Hotels/add.json";
     public static String HOTELLIST="Hotels/index.json";
     public static String ADD_USERS="Users/add.json";
+    public static String HOTEL_LIST="Hotels/index.json";
+    public static String ROOM_LIST="Rooms/index.json";
+    public static String ADD_ROOM="Rooms/add.json";
 
 
 

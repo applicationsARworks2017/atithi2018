@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/linn"
+    android:background="@color/light_background">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/user_tool">
+        <LinearLayout
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:id="@+id/user_tool_back"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/ic_arrow_back_white_24dp"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textColor="@color/white"
+            android:text="Room List"
+            android:visibility="gone"
+            android:textStyle="bold"
+            android:textSize="25dp"/>
+    </android.support.v7.widget.Toolbar>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/float_btn_room_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:visibility="visible"
+        app:backgroundTint="@color/yellow"
+        android:src="@mipmap/ic_add_black_24dp"
+        app:elevation="4dp"
+        android:tint="@color/pink"/>
+    <SearchView
+        android:id="@+id/room_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_tool">
+    </SearchView>
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_colorPrimary"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/room_search"
+        android:id="@+id/room_swipe">
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:layout_marginLeft="10dp"
+            android:background="@color/white"
+            android:id="@+id/room_list">
+        </ListView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/room_text"
+        android:text="Room Not Found"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+</RelativeLayout>

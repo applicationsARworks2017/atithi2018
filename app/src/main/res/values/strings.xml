@@ -9,4 +9,5 @@
     <string name="manageguest">Guest List with Details    </string>
     <string name="managereq">Check Special Request &amp; make discount   </string>
     <string name="managefin">Check Account Details &amp; Verify    </string>
+    <string name="manageprofile">Manage Profile </string>
 </resources>
