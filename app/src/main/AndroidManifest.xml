@@ -39,11 +39,13 @@
             android:name=".Activity.Home"
             android:label="Today&apos;s Guest">
 
-            <!--<intent-filter>
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <activity
             android:name=".Activity.NewGuestEntry"
@@ -57,12 +59,14 @@
         <activity
             android:name=".Activity.AdminDashboard"
             android:label="Atithi"
-            android:theme="@style/AppThemetwo" >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            android:theme="@style/AppThemetwo">
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".Activity.ProfileSA"
@@ -73,26 +77,35 @@
             android:name=".Activity.AddNewHotel"
             android:parentActivityName=".Activity.SuperadminDashboard"
             android:theme="@style/AppThemetwo" />
-        <activity android:name=".Activity.AllHotels"
-            android:theme="@style/AppThemetwo"
+        <activity
+            android:name=".Activity.AllHotels"
             android:label="All Hotels"
-            android:parentActivityName=".Activity.SuperadminDashboard"></activity>
-        <activity android:name=".Activity.Admin_Profile"
+            android:parentActivityName=".Activity.SuperadminDashboard"
+            android:theme="@style/AppThemetwo" />
+        <activity
+            android:name=".Activity.Admin_Profile"
             android:label="Manage Profile"
-            android:theme="@style/AppThemetwo"
-            android:parentActivityName=".Activity.AdminDashboard"></activity>
-        <activity android:name=".Activity.Admin_Hotel_List"
+            android:parentActivityName=".Activity.AdminDashboard"
+            android:theme="@style/AppThemetwo" />
+        <activity
+            android:name=".Activity.Admin_Hotel_List"
             android:label="Hotel List"
-            android:theme="@style/AppThemetwo"
-            android:parentActivityName=".Activity.AdminDashboard"></activity>
-        <activity android:name=".Activity.Admin_Room_List"
+            android:parentActivityName=".Activity.AdminDashboard"
+            android:theme="@style/AppThemetwo" />
+        <activity
+            android:name=".Activity.Admin_Room_List"
             android:label="Room List"
-            android:theme="@style/AppThemetwo"
-            android:parentActivityName=".Activity.Admin_Hotel_List"></activity>
-        <activity android:name=".Activity.Add_Room"
+            android:parentActivityName=".Activity.Admin_Hotel_List"
+            android:theme="@style/AppThemetwo" />
+        <activity
+            android:name=".Activity.Add_Room"
             android:label="Add Room"
+            android:parentActivityName=".Activity.Admin_Room_List"
+            android:theme="@style/AppThemetwo" />
+        <activity android:name=".Activity.RoomList"
             android:theme="@style/AppThemetwo"
-            android:parentActivityName=".Activity.Admin_Room_List"></activity>
+            android:parentActivityName=".Activity.NewGuestEntry"
+            android:label="Rooms"></activity>
     </application>
 
 </manifest>

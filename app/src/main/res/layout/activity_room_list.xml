@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rel_rooms"
+    tools:context="com.mars.myguest.Activity.RoomList">
+    <SearchView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:queryHint="Enter Room to search"
+        android:id="@+id/search_rooms"></SearchView>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_colorPrimary"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/search_rooms"
+        android:id="@+id/room_swipe">
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:layout_marginLeft="10dp"
+            android:background="@color/white"
+            android:id="@+id/room_list">
+        </ListView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/room_text"
+        android:text="Room Not Found"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+</RelativeLayout>

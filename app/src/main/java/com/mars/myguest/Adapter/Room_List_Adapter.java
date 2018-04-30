@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.mars.myguest.Activity.Admin_Room_List;
+import com.mars.myguest.Activity.RoomList;
 import com.mars.myguest.Pojo.Room_List;
 import com.mars.myguest.R;
 
@@ -24,6 +25,12 @@ public class Room_List_Adapter extends BaseAdapter {
         this.room_list=room_list;
     }
 
+    public Room_List_Adapter(RoomList roomList, ArrayList<Room_List> room_list) {
+
+        this.context=roomList;
+        this.room_list=room_list;
+    }
+
     @Override
     public int getCount() {
         return room_list.size();
@@ -31,7 +38,7 @@ public class Room_List_Adapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return room_list.get(i);
     }
 
     @Override

@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/rel"
             android:id="@+id/signin"
-            android:src="@mipmap/ic_arrow_back_white_24dp"
+            android:src="@mipmap/ldic_arrow_back_white_24dp"
             android:backgroundTint="@color/buttonlogin"
             android:layout_centerVertical="true"
             android:layout_marginLeft="-20dp"/>

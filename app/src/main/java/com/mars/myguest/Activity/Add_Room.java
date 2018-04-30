@@ -2,6 +2,7 @@ package com.mars.myguest.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.mars.myguest.R;
 import com.mars.myguest.Util.CheckInternet;
@@ -47,6 +49,12 @@ public class Add_Room extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(room_no.getText().toString().trim().length()<=0){
+                    showSnackBar("Enter Room Number");
+                }
+                else if(room_price.getText().toString().trim().length()<=0){
+                    showSnackBar("Enter Price");
+                }
                 addroom();
             }
         });
@@ -61,9 +69,7 @@ public class Add_Room extends AppCompatActivity {
             new addrom().execute(hotel_id,String.valueOf(rom_no) ,String.valueOf(rom_price) );
 
         } else {
-            Snackbar snackbar = Snackbar
-                    .make(linn, "No Internet", Snackbar.LENGTH_LONG);
-            snackbar.show();
+            showSnackBar("No Internet");
         }
     }
 
@@ -73,6 +79,7 @@ public class Add_Room extends AppCompatActivity {
         ProgressDialog progressDialog;
 
         int server_status;
+        String server_message;
 
         @Override
         protected void onPreExecute() {
@@ -154,11 +161,19 @@ public class Add_Room extends AppCompatActivity {
                     JSONObject res = new JSONObject(response.trim());
                     JSONObject ress=res.getJSONObject("res");
                     server_status = ress.optInt("status");
+                    if(server_status==1) {
+                        server_message = "Room Added Successfully";
+                    }
+                    else{
+                        server_message = "Failed";
+                    }
+
                 }
                 return null;
 
             } catch (Exception exception) {
                 Log.e(TAG, "LoginAsync : doInBackground", exception);
+                server_message="Connectivity Isuue";
             }
 
             return null;
@@ -170,22 +185,24 @@ public class Add_Room extends AppCompatActivity {
             progressDialog.cancel();
 
             if (server_status == 1) {
-                Snackbar snackbar = Snackbar
-                        .make(linn, "Room has been added successfully", Snackbar.LENGTH_LONG);
-                snackbar.show();
-                Intent i = new Intent(Add_Room.this, Admin_Room_List.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(i);
+                Toast.makeText(Add_Room.this,server_message,Toast.LENGTH_SHORT).show();
+                //showSnackBar(server_message);
+                Add_Room.this.finish();
             }
-                else {
-                Snackbar snackbar = Snackbar
-                        .make(linn, "Connectivity Isuue", Snackbar.LENGTH_LONG);
-                snackbar.show();
+            else{
+                showSnackBar(server_message);
             }
+
+
         }
 
+    }
+    void showSnackBar(String message){
+        Snackbar snackbar = Snackbar
+                .make(linn, message, Snackbar.LENGTH_LONG);
+        View snackBarView = snackbar.getView();
+        snackBarView.setBackgroundColor(Color.parseColor("#0091EA"));
+        snackbar.show();
     }
 }
 
