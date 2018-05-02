@@ -7,24 +7,35 @@
     android:background="@color/white"
     android:id="@+id/rel_newguest"
     tools:context="com.mars.myguest.Activity.NewGuestEntry">
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:id="@+id/circleprogress"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_alignParentBottom="true"
+        android:id="@+id/rel_progress"
+        android:visibility="gone"
+        android:layout_marginBottom="40dp">
         <TextView
             android:id="@+id/txtPercentage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/colorPrimary"
             />
 
         <ProgressBar
             android:id="@+id/progressBar"
+            android:layout_below="@id/txtPercentage"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="fill_parent"
             android:layout_height="20dp"
-            android:layout_marginBottom="35dp"
+            android:layout_marginTop="10dp"
             android:visibility="gone"/>
     </RelativeLayout>
     <ScrollView
@@ -309,6 +320,23 @@
                     android:id="@+id/checkin"
                     android:background="@color/colorPrimary"
                     android:textColor="@color/white"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/layback"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:background="@mipmap/ic_keyboard_arrow_left_black_24dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Back"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

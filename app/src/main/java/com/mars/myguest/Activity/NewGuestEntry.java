@@ -33,6 +33,7 @@ import android.widget.TextView;
 
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.mars.myguest.R;
+import com.mars.myguest.SplashActivity;
 import com.mars.myguest.Util.AndroidMultiPartEntity;
 import com.mars.myguest.Util.Constants;
 
@@ -45,6 +46,8 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -72,12 +75,14 @@ public class NewGuestEntry extends AppCompatActivity {
     Boolean sign=false;
     Calendar myCalendar;
     String photo_type;
-    RelativeLayout rel_newguest;
+    RelativeLayout rel_newguest,rel_progress;
     private static String[] PERMISSIONS = {Manifest.permission.CAMERA};
     Double dis_price,act_price,final_amount;
     private ProgressBar progressBar;
     long totalSize = 0;
     TextView txtPercentage;
+    LinearLayout layback;
+    ProgressBar circleprogress;
     String guest_name,guest_mobile,guest_address,guest_city,guest_dob,guest_no,guest_state,guest_country;
 
 
@@ -100,8 +105,10 @@ public class NewGuestEntry extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         txtPercentage=(TextView) findViewById(R.id.txtPercentage);
         rel_newguest=(RelativeLayout)findViewById(R.id.rel_newguest);
+        rel_progress=(RelativeLayout)findViewById(R.id.rel_progress);
         hotel_details=(LinearLayout)findViewById(R.id.hotel_details);
         userdetails=(LinearLayout)findViewById(R.id.userdetails);
+        layback=(LinearLayout)findViewById(R.id.layback);
         et_phone=(EditText)findViewById(R.id.et_phone);
         et_guest_no=(EditText)findViewById(R.id.et_guest_no);
         et_name=(EditText)findViewById(R.id.et_name);
@@ -128,6 +135,13 @@ public class NewGuestEntry extends AppCompatActivity {
                 validate();
                 /*userdetails.setVisibility(View.GONE);
                 hotel_details.setVisibility(View.VISIBLE);*/
+            }
+        });
+        layback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userdetails.setVisibility(View.VISIBLE);
+                hotel_details.setVisibility(View.GONE);
             }
         });
         checkin.setOnClickListener(new View.OnClickListener() {
@@ -420,10 +434,15 @@ public class NewGuestEntry extends AppCompatActivity {
      * Uploading the file to server
      * */
     private class UploadFileToServer extends AsyncTask<Void, Integer, String> {
+        int server_status;
+        String server_message;
 
         @Override
         protected void onPreExecute() {
             // setting progress bar to zero
+            //circleprogress.setVisibility(View.VISIBLE);
+            hotel_details.setVisibility(View.GONE);
+            rel_progress.setVisibility(View.VISIBLE);
             progressBar.setProgress(0);
             super.onPreExecute();
         }
@@ -431,6 +450,7 @@ public class NewGuestEntry extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Integer... progress) {
             // Making progress bar visible
+
             progressBar.setVisibility(View.VISIBLE);
 
             // updating progress bar value
@@ -511,34 +531,54 @@ no_of_guest:5
                 if (statusCode == 200) {
                     // Server response
                     responseString = EntityUtils.toString(r_entity);
+                    JSONObject res = new JSONObject(responseString.trim());
+                    JSONObject ress=res.getJSONObject("res");
+                     server_status= ress.optInt("status");
+                    if(server_status==1) {
+                        server_message = "Room Added Successfully";
+                    }
+                    else{
+                        server_message = "Failed";
+                    }
                 } else {
-                    responseString = "Error occurred! Http Status Code: "
+                    server_message = "Error occurred! Http Status Code: "
                             + statusCode;
                 }
 
             } catch (ClientProtocolException e) {
-                responseString = e.toString();
+                server_message = e.toString();
             } catch (IOException e) {
-                responseString = e.toString();
+                server_message = e.toString();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
 
-            return responseString;
+            return null;
 
         }
 
         @Override
         protected void onPostExecute(String result) {
+         //   circleprogress.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.INVISIBLE);
             txtPercentage.setVisibility(View.INVISIBLE);
 
             Log.e("ADD GUEST", "Response from server: " + result);
 
             // showing the server response in an alert dialog
-            if(result.contains("1")) {
+            if(server_status==1) {
                 showSnackBar("Guest Checkin Done");
+               // NewGuestEntry.this.finish();
+                Intent intent = new Intent(NewGuestEntry.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
             }
             else{
                 showSnackBar("Error while Checkin");
+                hotel_details.setVisibility(View.VISIBLE);
+                rel_progress.setVisibility(View.GONE);
 
             }
 
