@@ -13,10 +13,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.mars.myguest.Fragment.HomeFragment;
 import com.mars.myguest.Fragment.ProfileSupport;
 import com.mars.myguest.R;
+import com.mars.myguest.Util.Constants;
 
 public class Home extends AppCompatActivity {
     private DrawerLayout drawer;
@@ -29,6 +32,9 @@ public class Home extends AppCompatActivity {
     private static final String TAG_USERS = "Not Check-Out";
     private static final String TAG_SUPPORT = "Profile & Support";
     public static String CURRENT_TAG = TAG_HOME;
+    private ImageView imgNavHeaderBg, imgProfile;
+    private TextView txtName, txtphone;
+    String user_name,user_phone;
 
 
 
@@ -37,6 +43,11 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
+        user_name = Home.this.getSharedPreferences(Constants.SHAREDPREFERENCE_KEY, 0).getString(Constants.USER_NAME, null);
+        user_phone = Home.this.getSharedPreferences(Constants.SHAREDPREFERENCE_KEY, 0).getString(Constants.USER_PHONE, null);
+
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -45,6 +56,14 @@ public class Home extends AppCompatActivity {
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         // Navigation view header
         navHeader = navigationView.getHeaderView(0);
+
+        txtName = (TextView) navHeader.findViewById(R.id.name);
+        txtphone = (TextView) navHeader.findViewById(R.id.txtphone);
+        imgNavHeaderBg = (ImageView) navHeader.findViewById(R.id.img_header_bg);
+        imgProfile = (ImageView) navHeader.findViewById(R.id.img_profile);
+        String name=user_name.toUpperCase();
+        txtName.setText(name+" "+","+" "+user_phone);
+//        txtphone.setText(user_phone);
         mHandler = new Handler();
 
         setSupportActionBar(toolbar);

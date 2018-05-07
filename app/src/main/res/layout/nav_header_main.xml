@@ -22,20 +22,29 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <ImageView
+            android:id="@+id/img_profile"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:padding="15dp"
+            android:background="@color/yellow"
+            app:srcCompat="@drawable/logo" />
+
         <TextView
             android:id="@+id/name"
+            android:singleLine="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
+            android:paddingTop="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/website"
-            android:textColor="@color/colorPrimaryDark"
+            android:id="@+id/txtphone"
+            android:textSize="10dp"
+            android:singleLine="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
-
 
 </RelativeLayout>

@@ -1,23 +1,42 @@
 package com.mars.myguest.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.mars.myguest.Activity.NewGuestEntry;
+import com.mars.myguest.Adapter.Guest_List_Adapter;
+import com.mars.myguest.Pojo.Guest_List;
 import com.mars.myguest.R;
+import com.mars.myguest.Util.CheckInternet;
+import com.mars.myguest.Util.Constants;
 
-import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -44,7 +63,10 @@ public class HomeFragment extends Fragment {
     TextView no_guest;
     FloatingActionButton guestentry;
     private OnFragmentInteractionListener mListener;
-
+    FrameLayout linn;
+    ArrayList<Guest_List> guest_List;
+    Guest_List_Adapter adapter;
+    String hotel_id;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -81,11 +103,14 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_home, container, false);
+        hotel_id = getContext().getSharedPreferences(Constants.SHAREDPREFERENCE_KEY, 0).getString(Constants.HOTEL_ID, null);
+
         proimg=(CircleImageView) view.findViewById(R.id.pro_img);
         proimg.setImageResource(R.drawable.pr);
         swipe_allguest=(SwipeRefreshLayout)view.findViewById(R.id.swipe_allguest);
         lv_guests=(ListView)view.findViewById(R.id.lv_guests);
         no_guest=(TextView)view.findViewById(R.id.no_guest);
+        linn=(FrameLayout)view.findViewById(R.id.linn);
         guestentry=(FloatingActionButton)view.findViewById(R.id.guestentry);
         guestentry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,13 +121,27 @@ public class HomeFragment extends Fragment {
         });
 
         getGeusetList();
-
+        swipe_allguest.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getGeusetList();
+            }
+        });
         return view;
         //            holder.visitorsPic.setImageResource(R.drawable.no_image);
 
     }
 
     private void getGeusetList() {
+        swipe_allguest.setRefreshing(false);
+        if (CheckInternet.getNetworkConnectivityStatus(getContext())) {
+            new GuestList().execute(hotel_id);
+
+        } else {
+            Snackbar snackbar = Snackbar
+                    .make(linn, "No Internet", Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
 
     }
 
@@ -143,5 +182,177 @@ public class HomeFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private class GuestList extends AsyncTask<String, Void, Void> {
+
+        private static final String TAG = "ServiceProvider";
+        ProgressDialog progressDialog;
+        private String guest_id, first_name, last_name, mobile, address,
+                city, photo, doc_1, doc_2, created,modified,signature;
+        int server_status;
+
+        @Override
+        protected void onPreExecute() {
+            if (progressDialog == null) {
+                progressDialog = ProgressDialog.show(getContext(), "Loading", "Please wait...");
+            }
+
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+
+
+            try {
+                InputStream in = null;
+                int resCode = -1;
+                String link = Constants.BASEURL + Constants.GUEST_LIST;
+                URL url = new URL(link);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(10000);
+                conn.setConnectTimeout(15000);
+                conn.setRequestMethod("POST");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+                conn.setAllowUserInteraction(false);
+                conn.setInstanceFollowRedirects(true);
+                conn.setRequestMethod("POST");
+
+                Uri.Builder builder = new Uri.Builder()
+                        .appendQueryParameter("hotel_id", params[0]);
+                String query = builder.build().getEncodedQuery();
+
+                OutputStream os = conn.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
+                writer.write(query);
+                writer.flush();
+                writer.close();
+                os.close();
+
+                conn.connect();
+                resCode = conn.getResponseCode();
+                if (resCode == HttpURLConnection.HTTP_OK) {
+                    in = conn.getInputStream();
+                }
+                if (in == null) {
+                    return null;
+                }
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+                String response = "", data = "";
+
+                while ((data = reader.readLine()) != null) {
+                    response += data + "\n";
+                }
+
+                Log.i(TAG, "Response : " + response);
+
+                            /*
+                            *
+                            * {
+    "guests": [
+        {
+            "id": 1,
+            "first_name": "Avinash",
+            "last_name": "pathak",
+            "mobile": "7205674061",
+            "address": "MIG - 102",
+            "pin": "751019",
+            "city": "bhubaneswer",
+            "state_id": 1,
+            "country_id": 1,
+            "photo": "http://a2r.in/atithi/files/guest/file1524449208441262809.jpg",
+            "doc_1": "http://a2r.in/atithi/files/guest/file15244492101506905463.jpg",
+            "doc_2": "http://a2r.in/atithi/files/guest/file15244492121314018502.jpg",
+            "dob": "1988-01-15T00:00:00+00:00",
+            "no_of_guest": 5,
+            "signature": "http://a2r.in/atithi/files/guest/file15244492121138583141.jpg",
+            "created": "2018-04-23T02:06:56+00:00",
+            "modified": "2018-04-23T02:06:56+00:00",
+            "country": {
+                "id": 1,
+                "name": "India",
+                "is_active": "Y",
+                "created": null,
+                "modified": null
+            },
+            "state": {
+                "id": 1,
+                "name": "Odisha",
+                "country_id": 1,
+                "is_active": "Y",
+                "created": null,
+                "modified": null
+            }
+        }
+    ]*/
+
+                if (response != null && response.length() > 0) {
+                    JSONObject res = new JSONObject(response);
+                    guest_List = new ArrayList<>();
+
+                    JSONArray splist = res.getJSONArray("guests");
+                    if (splist.length() > 0) {
+                        server_status = 1;
+                        for (int i = 0; i < splist.length(); i++) {
+                            JSONObject o_list_obj = splist.getJSONObject(i);
+                            guest_id = o_list_obj.getString("id");
+                            first_name = o_list_obj.getString("first_name");
+                            last_name = o_list_obj.getString("last_name");
+                            mobile = o_list_obj.getString("mobile");
+                            address = o_list_obj.getString("address");
+                            city = o_list_obj.getString("city");
+                            photo = o_list_obj.getString("photo");
+                            doc_1 = o_list_obj.getString("doc_1");
+                            doc_2 = o_list_obj.getString("doc_2");
+                            created = o_list_obj.getString("created");
+                            modified = o_list_obj.getString("modified");
+                            signature = o_list_obj.getString("signature");
+
+                            /*JSONObject obj = o_list_obj.getJSONObject("country");
+                            rooml_user_id = obj.getString("id");
+                            room_user_name = obj.getString("name");
+                            room_user_address = obj.getString("address");
+                            room_user_photo = obj.getString("photo");
+                            room_user_created = obj.getString("created");
+                            room_user_modified = obj.getString("modified");*/
+
+
+                            Guest_List g_list = new Guest_List(guest_id, first_name, last_name, mobile, address,
+                                    city, photo, doc_1, doc_2, created,modified,signature);
+                            guest_List.add(g_list);
+
+                        }
+                    } else {
+                        server_status = 0;
+                    }
+
+                }
+                return null;
+
+            } catch (Exception exception) {
+                Log.e(TAG, "LoginAsync : doInBackground", exception);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void user) {
+            super.onPostExecute(user);
+            progressDialog.cancel();
+
+            if (server_status == 1) {
+//                Collections.reverse(guest_List);
+                adapter = new Guest_List_Adapter(getContext(), guest_List);
+                lv_guests.setAdapter(adapter);
+            } else {
+                swipe_allguest.setVisibility(View.GONE);
+                lv_guests.setVisibility(View.GONE);
+                no_guest.setVisibility(View.VISIBLE);
+            }
+
+        }
     }
 }
