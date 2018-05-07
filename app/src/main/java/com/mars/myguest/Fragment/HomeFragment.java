@@ -6,13 +6,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.mars.myguest.Activity.NewGuestEntry;
 import com.mars.myguest.R;
+
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -34,6 +39,9 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     CircleImageView proimg;
+    SwipeRefreshLayout swipe_allguest;
+    ListView lv_guests;
+    TextView no_guest;
     FloatingActionButton guestentry;
     private OnFragmentInteractionListener mListener;
 
@@ -75,6 +83,9 @@ public class HomeFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_home, container, false);
         proimg=(CircleImageView) view.findViewById(R.id.pro_img);
         proimg.setImageResource(R.drawable.pr);
+        swipe_allguest=(SwipeRefreshLayout)view.findViewById(R.id.swipe_allguest);
+        lv_guests=(ListView)view.findViewById(R.id.lv_guests);
+        no_guest=(TextView)view.findViewById(R.id.no_guest);
         guestentry=(FloatingActionButton)view.findViewById(R.id.guestentry);
         guestentry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,8 +95,14 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        getGeusetList();
+
         return view;
         //            holder.visitorsPic.setImageResource(R.drawable.no_image);
+
+    }
+
+    private void getGeusetList() {
 
     }
 
