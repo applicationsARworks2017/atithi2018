@@ -14,7 +14,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mars.myguest.Adapter.Room_List_Adapter;
 import com.mars.myguest.Pojo.Room_List;
@@ -46,11 +45,18 @@ public class RoomList extends AppCompatActivity {
     ArrayList<Room_List> room_List;
     RelativeLayout rel_rooms;
     String hotel_id;
+    String page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_list);
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            page = extras.getString("PAGE");
+            // and get whatever type user account id is
+        }
         hotel_id = RoomList.this.getSharedPreferences(Constants.SHAREDPREFERENCE_KEY, 0).getString(Constants.HOTEL_ID, null);
         room_list = (ListView) findViewById(R.id.room_list);
         room_swipe = (SwipeRefreshLayout) findViewById(R.id.room_swipe);
@@ -61,11 +67,16 @@ public class RoomList extends AppCompatActivity {
         room_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Room_List rooms=(Room_List)room_list.getItemAtPosition(i);
-                NewGuestEntry.et_room.setText(rooms.getRoom_no());
-                NewGuestEntry.et_price.setText(rooms.getRoom_price());
-                NewGuestEntry.et_fprice.setText(rooms.getRoom_price());
-                RoomList.this.finish();
+                if(page.contentEquals("New Guest")) {
+                    Room_List rooms = (Room_List) room_list.getItemAtPosition(i);
+                    NewGuestEntry.et_room.setText(rooms.getRoom_no());
+                    NewGuestEntry.room_id = rooms.getRoom_id();
+                    NewGuestEntry.et_room.setText(rooms.getRoom_no());
+                    NewGuestEntry.et_price.setText(rooms.getRoom_price());
+                    NewGuestEntry.et_fprice.setText(rooms.getRoom_price());
+                    RoomList.this.finish();
+                }
+
 
             }
         });

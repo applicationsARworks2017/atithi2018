@@ -285,6 +285,16 @@ public class HomeFragment extends Fragment {
                 "created": null,
                 "modified": null
             }
+            "room": {
+                "id": 1,
+                "hotel_id": 1,
+                "room_no": "102",
+                "price": 200,
+                "is_active": "Y",
+                "created": "2018-04-18T00:22:40+00:00",
+                "modified": "2018-04-18T00:25:30+00:00"
+            },
+
         }
     ]*/
 
@@ -297,6 +307,8 @@ public class HomeFragment extends Fragment {
                         server_status = 1;
                         for (int i = 0; i < splist.length(); i++) {
                             JSONObject o_list_obj = splist.getJSONObject(i);
+                            JSONObject room_obj=o_list_obj.getJSONObject("room");
+                            JSONArray tr_array=o_list_obj.getJSONArray("guest_transactions");
                             guest_id = o_list_obj.getString("id");
                             first_name = o_list_obj.getString("first_name");
                             last_name = o_list_obj.getString("last_name");
@@ -309,6 +321,15 @@ public class HomeFragment extends Fragment {
                             created = o_list_obj.getString("created");
                             modified = o_list_obj.getString("modified");
                             signature = o_list_obj.getString("signature");
+                            String room_id=room_obj.getString("id");
+                            String room_no=room_obj.getString("room_no");
+                            String price=room_obj.getString("price");
+                            String checkin,checkout,advance_amonut,total_amount,payable_amount,admin_discount,no_of_days;
+                            if(tr_array.length()>0){
+                                for(int j=0; j<tr_array.length();j++){
+
+                                }
+                            }
 
                             /*JSONObject obj = o_list_obj.getJSONObject("country");
                             rooml_user_id = obj.getString("id");
@@ -320,7 +341,7 @@ public class HomeFragment extends Fragment {
 
 
                             Guest_List g_list = new Guest_List(guest_id, first_name, last_name, mobile, address,
-                                    city, photo, doc_1, doc_2, created,modified,signature);
+                                    city, photo, doc_1, doc_2, created,modified,signature,room_id,room_no,price);
                             guest_List.add(g_list);
 
                         }

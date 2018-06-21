@@ -30,6 +30,7 @@ public class Home extends AppCompatActivity {
     public static int item_id;
     private static final String TAG_HOME = "Today's Guest";
     private static final String TAG_USERS = "Not Check-Out";
+    private static final String TAG_EXPENSES = "Add Expenses";
     private static final String TAG_SUPPORT = "Profile & Support";
     public static String CURRENT_TAG = TAG_HOME;
     private ImageView imgNavHeaderBg, imgProfile;
@@ -119,11 +120,11 @@ public class Home extends AppCompatActivity {
                         item_id = R.id.nav_checkout;
                         CURRENT_TAG = TAG_USERS;
                         break;
-                     /*case R.id.resident_preapprove:
-                        item_id = R.id.resident_preapprove;
-                        CURRENT_TAG = TAG_PREAPPROVE;
+                     case R.id.nav_expenses:
+                        item_id = R.id.nav_expenses;
+                        CURRENT_TAG = TAG_EXPENSES;
                         break;
-                    case R.id.resident_preapproved_list:
+                    /*case R.id.resident_preapproved_list:
                         item_id = R.id.resident_preapproved_list;
                         CURRENT_TAG = TAG_PREAPPROVELIST;
                         break;
@@ -219,12 +220,12 @@ public class Home extends AppCompatActivity {
                 HomeFragment homeFragment = new HomeFragment();
                 toolbar.setTitle("Today's Guest");
                 return homeFragment;
-            /* case R.id.resident_profile:
+             case R.id.nav_expenses:
                 // Entry for visitors
-                ResidentProfile profile = new ResidentProfile();
-                toolbar.setTitle("Update your phone number");
-                return profile;
-            case R.id.resident_preapprove:
+                /*AddExpenses expenses = new AddExpenses();
+                toolbar.setTitle("Add Expenses");
+                return expenses;*/
+            /*case R.id.resident_preapprove:
                 // Entry for visitors
                 ResidentPreApprove preapprove = new ResidentPreApprove();
                 toolbar.setTitle("Invite Visitors");

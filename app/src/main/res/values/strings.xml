@@ -10,4 +10,10 @@
     <string name="managereq">Check Special Request &amp; make discount   </string>
     <string name="managefin">Check Account Details &amp; Verify    </string>
     <string name="manageprofile">Manage Profile </string>
+    <string-array name="expenses_array">
+        <item> - - Select Type - - </item>
+        <item>Food</item>
+        <item>Travels</item>
+        <item>Others</item>
+    </string-array>
 </resources>

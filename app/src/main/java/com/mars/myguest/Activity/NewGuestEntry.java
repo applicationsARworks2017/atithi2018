@@ -61,7 +61,7 @@ import static com.mars.myguest.Util.Constants.modifyOrientation;
 public class NewGuestEntry extends AppCompatActivity {
     LinearLayout hotel_details,userdetails;
     Button submit,checkin,bt_addlogo;
-    EditText et_phone,et_name,et_dob,et_address,et_guest_no,et_city,et_state,et_discount;
+    EditText et_phone,et_name,et_dob,et_address,et_guest_no,et_city,et_state,et_discount,last_name;
     ImageView photo_iv,doc_front,doc_back;
     public static EditText et_room,et_price,et_fprice;
     SignaturePad signaturePad;
@@ -83,7 +83,8 @@ public class NewGuestEntry extends AppCompatActivity {
     TextView txtPercentage;
     LinearLayout layback;
     ProgressBar circleprogress;
-    String guest_name,guest_mobile,guest_address,guest_city,guest_dob,guest_no,guest_state,guest_country;
+    public static String room_id;
+    String hotel_id,guest_name,guest_lname,guest_mobile,guest_address,guest_city,guest_dob,guest_no,guest_state,guest_country;
 
 
 
@@ -101,6 +102,8 @@ public class NewGuestEntry extends AppCompatActivity {
 
             }
         }
+        hotel_id = NewGuestEntry.this.getSharedPreferences(Constants.SHAREDPREFERENCE_KEY, 0).getString(Constants.HOTEL_ID, null);
+
         myCalendar= Calendar.getInstance();
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         txtPercentage=(TextView) findViewById(R.id.txtPercentage);
@@ -112,6 +115,7 @@ public class NewGuestEntry extends AppCompatActivity {
         et_phone=(EditText)findViewById(R.id.et_phone);
         et_guest_no=(EditText)findViewById(R.id.et_guest_no);
         et_name=(EditText)findViewById(R.id.et_name);
+        last_name=(EditText)findViewById(R.id.last_name);
         et_dob=(EditText)findViewById(R.id.et_dob);
         et_address=(EditText)findViewById(R.id.et_address);
         et_room=(EditText)findViewById(R.id.et_room);
@@ -161,6 +165,7 @@ public class NewGuestEntry extends AppCompatActivity {
                     * */
                    // showSnackBar("Done");
                      guest_name=et_name.getText().toString().trim();
+                     guest_lname=last_name.getText().toString().trim();
                      guest_mobile=et_phone.getText().toString().trim();
                      guest_address=et_address.getText().toString().trim();
                      guest_city=et_city.getText().toString().trim();
@@ -179,6 +184,7 @@ public class NewGuestEntry extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(NewGuestEntry.this,RoomList.class);
+                intent.putExtra("PAGE","New Guest");
                 startActivity(intent);
             }
         });
@@ -389,7 +395,9 @@ public class NewGuestEntry extends AppCompatActivity {
             showSnackBar("Enter Phone Number");
         }
         else if(et_name.getText().toString().trim().length()<=0){
-            showSnackBar("Enter Name");
+            showSnackBar("Enter First Name");
+        } else if(last_name.getText().toString().trim().length()<=0){
+            showSnackBar("Enter Last Name");
         }
         else if(et_dob.getText().toString().trim().length()<=0){
             showSnackBar("Enter DOB");
@@ -501,7 +509,7 @@ no_of_guest:5
 
                 File photo = imgfile_photo;
                 File doc_1 = imgfile_docfront;
-                File doc_2 = imgfile_docfront;
+                File doc_2 = imgfile_docback;
                 File signature = signature_photo;
 
                 // Adding file data to http body
@@ -512,6 +520,8 @@ no_of_guest:5
 
                 // Extra parameters if you want to pass to server
                 entity.addPart("first_name", new StringBody(guest_name));
+                entity.addPart("last_name", new StringBody(guest_lname));
+                entity.addPart("hotel_id", new StringBody(hotel_id));
                 entity.addPart("mobile", new StringBody(guest_mobile));
                 entity.addPart("address", new StringBody(guest_address));
                 entity.addPart("city", new StringBody(guest_city));
@@ -519,6 +529,7 @@ no_of_guest:5
                 entity.addPart("country_id", new StringBody(guest_country));
                 entity.addPart("dob", new StringBody(guest_dob));
                 entity.addPart("no_of_guest", new StringBody(guest_no));
+                entity.addPart("room_id", new StringBody(room_id));
 
                 totalSize = entity.getContentLength();
                 httppost.setEntity(entity);
@@ -535,7 +546,7 @@ no_of_guest:5
                     JSONObject ress=res.getJSONObject("res");
                      server_status= ress.optInt("status");
                     if(server_status==1) {
-                        server_message = "Room Added Successfully";
+                        server_message = "Checkin Successful";
                     }
                     else{
                         server_message = "Failed";
@@ -569,7 +580,7 @@ no_of_guest:5
             if(server_status==1) {
                 showSnackBar("Guest Checkin Done");
                // NewGuestEntry.this.finish();
-                Intent intent = new Intent(NewGuestEntry.this, LoginActivity.class);
+                Intent intent = new Intent(NewGuestEntry.this, Home.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

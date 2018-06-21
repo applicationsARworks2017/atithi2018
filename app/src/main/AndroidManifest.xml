@@ -102,10 +102,21 @@
             android:label="Add Room"
             android:parentActivityName=".Activity.Admin_Room_List"
             android:theme="@style/AppThemetwo" />
-        <activity android:name=".Activity.RoomList"
-            android:theme="@style/AppThemetwo"
+        <activity
+            android:name=".Activity.RoomList"
+            android:label="Rooms"
             android:parentActivityName=".Activity.NewGuestEntry"
-            android:label="Rooms"></activity>
+            android:theme="@style/AppThemetwo" />
+        <activity
+            android:name=".Activity.AttachGuest"
+            android:label="Attach Guest"
+            android:parentActivityName=".Activity.Home"
+            android:theme="@style/AppThemetwo" />
+        <activity android:name=".Activity.Expenses"></activity>
+        <activity android:name=".Activity.Add_expenses"
+            android:parentActivityName=".Activity.Expenses"
+            android:theme="@style/AppThemetwo"
+            android:label="Expense Details"></activity>
     </application>
 
 </manifest>

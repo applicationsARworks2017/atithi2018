@@ -3,10 +3,35 @@ package com.mars.myguest.Pojo;
 public class Guest_List {
 
     String guest_id, first_name, last_name, mobile, address,
-            city, photo, doc_1, doc_2, created,modified,signature;
+            city, photo, doc_1, doc_2, created,modified,signature,room_id,room_no,price;
+
+    public String getRoom_id() {
+        return room_id;
+    }
+
+    public void setRoom_id(String room_id) {
+        this.room_id = room_id;
+    }
+
+    public String getRoom_no() {
+        return room_no;
+    }
+
+    public void setRoom_no(String room_no) {
+        this.room_no = room_no;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
     public Guest_List(String guest_id, String first_name, String last_name, String mobile, String address, String city,
-                      String photo, String doc_1, String doc_2, String created, String modified,String signature) {
+                      String photo, String doc_1, String doc_2, String created, String modified, String signature, String room_id, String room_no,
+                      String price) {
         this.guest_id=guest_id;
         this.first_name=first_name;
         this.last_name=last_name;
@@ -19,6 +44,10 @@ public class Guest_List {
         this.created=created;
         this.modified=modified;
         this.signature=signature;
+        this.room_id=room_id;
+        this.room_no=room_no;
+        this.price=price;
+
 
     }
 
