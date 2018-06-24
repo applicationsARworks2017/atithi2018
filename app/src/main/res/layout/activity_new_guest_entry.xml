@@ -103,7 +103,7 @@
                     android:inputType="textPersonName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="First Name">
+                    android:hint="Full Name">
                 </EditText>
 
             </android.support.design.widget.TextInputLayout>
@@ -111,6 +111,7 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_marginTop="10dp"
+                    android:visibility="gone"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -176,6 +177,7 @@
 
                 <EditText
                     android:id="@+id/et_city"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="City" />
@@ -189,6 +191,8 @@
 
                 <EditText
                     android:id="@+id/et_state"
+                    android:focusable="false"
+                    android:editable="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="State" />

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/state_rel"
+    tools:context="com.mars.myguest.Activity.Statelist">
+    <SearchView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:queryHint="Search State"
+        android:id="@+id/sv_state"></SearchView>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/sv_state"
+        android:layout_marginTop="10dp"
+        android:id="@+id/lv_states"
+        android:divider="@null"></ListView>
+</RelativeLayout>

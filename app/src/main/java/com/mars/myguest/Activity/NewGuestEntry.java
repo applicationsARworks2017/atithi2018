@@ -61,9 +61,9 @@ import static com.mars.myguest.Util.Constants.modifyOrientation;
 public class NewGuestEntry extends AppCompatActivity {
     LinearLayout hotel_details,userdetails;
     Button submit,checkin,bt_addlogo;
-    EditText et_phone,et_name,et_dob,et_address,et_guest_no,et_city,et_state,et_discount,last_name;
+    EditText et_phone,et_name,et_dob,et_address,et_guest_no,et_city,et_discount,last_name;
     ImageView photo_iv,doc_front,doc_back;
-    public static EditText et_room,et_price,et_fprice;
+    public static EditText et_room,et_price,et_fprice,et_state;
     SignaturePad signaturePad;
     private static final int CAMERA_REQUEST = 1888;
     String imPath,checkin_id;
@@ -84,7 +84,8 @@ public class NewGuestEntry extends AppCompatActivity {
     LinearLayout layback;
     ProgressBar circleprogress;
     public static String room_id;
-    String hotel_id,guest_name,guest_lname,guest_mobile,guest_address,guest_city,guest_dob,guest_no,guest_state,guest_country;
+    String hotel_id,guest_name,guest_lname,guest_mobile,guest_address,guest_city,guest_dob,guest_no;
+    public static String guest_state,guest_country;;
 
 
 
@@ -141,6 +142,13 @@ public class NewGuestEntry extends AppCompatActivity {
                 hotel_details.setVisibility(View.VISIBLE);*/
             }
         });
+        et_state.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NewGuestEntry.this,Statelist.class);
+                startActivity(intent);
+            }
+        });
         layback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -165,14 +173,12 @@ public class NewGuestEntry extends AppCompatActivity {
                     * */
                    // showSnackBar("Done");
                      guest_name=et_name.getText().toString().trim();
-                     guest_lname=last_name.getText().toString().trim();
+                  //   guest_lname=last_name.getText().toString().trim();
                      guest_mobile=et_phone.getText().toString().trim();
                      guest_address=et_address.getText().toString().trim();
-                     guest_city=et_city.getText().toString().trim();
+                    // guest_city=et_city.getText().toString().trim();
                      guest_dob=et_dob.getText().toString().trim();
                      guest_no=et_guest_no.getText().toString().trim();
-                     guest_state="1";
-                     guest_country="1";
 
                     new UploadFileToServer().execute();
 
@@ -395,10 +401,10 @@ public class NewGuestEntry extends AppCompatActivity {
             showSnackBar("Enter Phone Number");
         }
         else if(et_name.getText().toString().trim().length()<=0){
-            showSnackBar("Enter First Name");
-        } else if(last_name.getText().toString().trim().length()<=0){
+            showSnackBar("Enter Full Name");
+        } /*else if(last_name.getText().toString().trim().length()<=0){
             showSnackBar("Enter Last Name");
-        }
+        }*/
         else if(et_dob.getText().toString().trim().length()<=0){
             showSnackBar("Enter DOB");
         }
@@ -406,9 +412,9 @@ public class NewGuestEntry extends AppCompatActivity {
             showSnackBar("Enter Number Of Guest");
         }else if(et_address.getText().toString().trim().length()<=0){
             showSnackBar("Enter Address");
-        }else if(et_city.getText().toString().trim().length()<=0){
+        }/*else if(et_city.getText().toString().trim().length()<=0){
             showSnackBar("Enter City");
-        }else if(et_state.getText().toString().trim().length()<=0){
+        }*/else if(et_state.getText().toString().trim().length()<=0){
             showSnackBar("Enter State");
         }else if(docAvailable==false){
             showSnackBar("Add ID proof of the Guest");
@@ -520,11 +526,11 @@ no_of_guest:5
 
                 // Extra parameters if you want to pass to server
                 entity.addPart("first_name", new StringBody(guest_name));
-                entity.addPart("last_name", new StringBody(guest_lname));
+               // entity.addPart("last_name", new StringBody(guest_lname));
                 entity.addPart("hotel_id", new StringBody(hotel_id));
                 entity.addPart("mobile", new StringBody(guest_mobile));
                 entity.addPart("address", new StringBody(guest_address));
-                entity.addPart("city", new StringBody(guest_city));
+               // entity.addPart("city", new StringBody(guest_city));
                 entity.addPart("state_id", new StringBody(guest_state));
                 entity.addPart("country_id", new StringBody(guest_country));
                 entity.addPart("dob", new StringBody(guest_dob));
