@@ -1,6 +1,7 @@
 package com.mars.myguest.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -17,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.mars.myguest.R;
+import com.mars.myguest.SplashActivity;
 import com.mars.myguest.Util.CheckInternet;
 import com.mars.myguest.Util.Constants;
 
@@ -195,7 +197,12 @@ public class Add_expenses extends AppCompatActivity {
                 if (server_status == 1) {
                     Toast.makeText(Add_expenses.this, server_message, Toast.LENGTH_SHORT).show();
                     //showSnackBar(server_message);
-                    Add_expenses.this.finish();
+                   // Add_expenses.this.finish();
+                    Intent intent = new Intent(Add_expenses.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intent);
                 } else {
                     showSnackBar(server_message);
                 }

@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by Amaresh on 4/14/18.
@@ -30,7 +33,9 @@ public class Constants {
     public static String LOGIN="Users/loginCheck.json";
     public static String ADD_HOTEL="Hotels/add.json";
     public static String HOTELLIST="Hotels/index.json";
+    public static String EXP_LIST="Expences/index.json";
     public static String ADD_USERS="Users/add.json";
+    public static String TRASANCTION="GuestTransactions/add.json";
     public static String HOTEL_LIST="Hotels/index.json";
     public static String ROOM_LIST="Rooms/index.json";
     public static String STATE_LIST="States/index.json";
@@ -93,5 +98,24 @@ public class Constants {
             // Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
         }
         return imageFile;
+    }
+    public static String getOurDate(String ourDate)
+    {
+        try
+        {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+            formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+            Date value = formatter.parse(ourDate);
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy hh:mm aa"); //this format changeable
+            dateFormatter.setTimeZone(TimeZone.getDefault());
+            ourDate = dateFormatter.format(value);
+
+            //Log.d("ourDate", ourDate);
+        }
+        catch (Exception e)
+        {
+            ourDate = "00-00-0000 00:00";
+        }
+        return ourDate;
     }
 }

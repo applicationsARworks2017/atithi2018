@@ -190,6 +190,7 @@ public class HomeFragment extends Fragment {
         ProgressDialog progressDialog;
         private String guest_id, first_name, last_name, mobile, address,
                 city, photo, doc_1, doc_2, created,modified,signature;
+        private  String tr_id,checkin_time,checkout_time,advance_amonut,total_amount,discount,admin_discount,payable_amount,no_of_days;
         int server_status;
 
         @Override
@@ -321,12 +322,23 @@ public class HomeFragment extends Fragment {
                             created = o_list_obj.getString("created");
                             modified = o_list_obj.getString("modified");
                             signature = o_list_obj.getString("signature");
+                            String guest_status = o_list_obj.getString("status");
                             String room_id=room_obj.getString("id");
                             String room_no=room_obj.getString("room_no");
                             String price=room_obj.getString("price");
-                            String checkin,checkout,advance_amonut,total_amount,payable_amount,admin_discount,no_of_days;
                             if(tr_array.length()>0){
-                                for(int j=0; j<tr_array.length();j++){
+                                int j;
+                                for( j=0; j<tr_array.length();j++){
+                                    JSONObject tr = tr_array.getJSONObject(j);
+                                    tr_id=tr.getString("id");
+                                    checkin_time=tr.getString("checkin");
+                                    checkout_time=tr.getString("checkout");
+                                    advance_amonut=tr.getString("advance_amonut");
+                                    total_amount=tr.getString("total_amount");
+                                    discount=tr.getString("discount");
+                                    admin_discount=tr.getString("admin_discount");
+                                    no_of_days=tr.getString("no_of_days");
+                                    payable_amount=tr.getString("payable_amount");
 
                                 }
                             }
@@ -341,7 +353,8 @@ public class HomeFragment extends Fragment {
 
 
                             Guest_List g_list = new Guest_List(guest_id, first_name, last_name, mobile, address,
-                                    city, photo, doc_1, doc_2, created,modified,signature,room_id,room_no,price);
+                                    city, photo, doc_1, doc_2, created,modified,signature,room_id,room_no,price
+                                    ,tr_id,checkin_time,checkout_time,advance_amonut,total_amount,discount,admin_discount,no_of_days,payable_amount,guest_status);
                             guest_List.add(g_list);
 
                         }

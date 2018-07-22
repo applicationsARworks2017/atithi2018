@@ -14,6 +14,7 @@
     <color name="deeppink">#a4008b</color>
     <color name="buttonlogin">#00d7c8</color>
     <color name="background">#d8d8d8</color>
+    <color name="new_background">#f9fdfd</color>
     <color name="white">#FFFF</color>
     <color name="yellow">#ffea00</color>
     <color name="light_colorPrimary">#f0eeee</color>

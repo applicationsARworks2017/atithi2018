@@ -116,9 +116,9 @@
         <activity
             android:name=".Activity.Add_expenses"
             android:label="Expense Details"
-            android:parentActivityName=".Activity.Expenses"
             android:theme="@style/AppThemetwo" />
-        <activity android:name=".Activity.Statelist"></activity>
+        <activity android:name=".Activity.Statelist" />
+        <activity android:name=".Activity.GuestDetails"></activity>
     </application>
 
 </manifest>

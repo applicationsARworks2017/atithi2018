@@ -3,6 +3,8 @@ package com.mars.myguest.Activity;
 import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -30,10 +32,12 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.mars.myguest.R;
 import com.mars.myguest.SplashActivity;
+import com.mars.myguest.Util.APIManager;
 import com.mars.myguest.Util.AndroidMultiPartEntity;
 import com.mars.myguest.Util.Constants;
 
@@ -51,6 +55,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -61,7 +66,7 @@ import static com.mars.myguest.Util.Constants.modifyOrientation;
 public class NewGuestEntry extends AppCompatActivity {
     LinearLayout hotel_details,userdetails;
     Button submit,checkin,bt_addlogo;
-    EditText et_phone,et_name,et_dob,et_address,et_guest_no,et_city,et_discount,last_name;
+    EditText et_phone,et_name,et_dob,et_address,et_guest_no,et_city,et_discount,last_name,et_days,et_advance,et_checkin_time;
     ImageView photo_iv,doc_front,doc_back;
     public static EditText et_room,et_price,et_fprice,et_state;
     SignaturePad signaturePad;
@@ -84,8 +89,10 @@ public class NewGuestEntry extends AppCompatActivity {
     LinearLayout layback;
     ProgressBar circleprogress;
     public static String room_id;
-    String hotel_id,guest_name,guest_lname,guest_mobile,guest_address,guest_city,guest_dob,guest_no;
+    String hotel_id,guest_name,guest_lname,guest_mobile,guest_address,guest_city,guest_dob,guest_no,days,advance,checkin_time;
     public static String guest_state,guest_country;;
+    String response_guest_id,user_id,dateto_send;
+    private int mYear, mMonth, mDay, mHour, mMinute;
 
 
 
@@ -104,8 +111,16 @@ public class NewGuestEntry extends AppCompatActivity {
             }
         }
         hotel_id = NewGuestEntry.this.getSharedPreferences(Constants.SHAREDPREFERENCE_KEY, 0).getString(Constants.HOTEL_ID, null);
+        user_id = NewGuestEntry.this.getSharedPreferences(Constants.SHAREDPREFERENCE_KEY, 0).getString(Constants.USER_ID, null);
 
         myCalendar= Calendar.getInstance();
+
+        DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        dateFormatter.setLenient(false);
+        Date today = new Date();
+        String curr_date = dateFormatter.format(myCalendar.getTime());
+        dateto_send=curr_date.substring(0, Math.min(curr_date.length(), 10));
+
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         txtPercentage=(TextView) findViewById(R.id.txtPercentage);
         rel_newguest=(RelativeLayout)findViewById(R.id.rel_newguest);
@@ -120,6 +135,9 @@ public class NewGuestEntry extends AppCompatActivity {
         et_dob=(EditText)findViewById(R.id.et_dob);
         et_address=(EditText)findViewById(R.id.et_address);
         et_room=(EditText)findViewById(R.id.et_room);
+        et_days=(EditText)findViewById(R.id.et_days);
+        et_advance=(EditText)findViewById(R.id.et_advance);
+        et_checkin_time=(EditText)findViewById(R.id.et_checkin_time);
         et_price=(EditText)findViewById(R.id.et_price);
         et_discount=(EditText)findViewById(R.id.et_discount);
         et_fprice=(EditText)findViewById(R.id.et_fprice);
@@ -156,12 +174,43 @@ public class NewGuestEntry extends AppCompatActivity {
                 hotel_details.setVisibility(View.GONE);
             }
         });
+        et_checkin_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar c = Calendar.getInstance();
+                mHour = c.get(Calendar.HOUR_OF_DAY);
+                mMinute = c.get(Calendar.MINUTE);
+
+                // Launch Time Picker Dialog
+                TimePickerDialog timePickerDialog = new TimePickerDialog(NewGuestEntry.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay,
+                                                  int minute) {
+
+                                et_checkin_time.setText(hourOfDay + ":" + minute);
+                            }
+                        }, mHour, mMinute, false);
+                timePickerDialog.show();
+
+            }
+        });
         checkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                // NewGuestEntry.this.finish();
                 if(et_room.getText().toString().trim().length()<=0){
                     showSnackBar("Select Room");
+                }
+                else if(et_days.getText().toString().trim().length()<=0){
+                    showSnackBar("Enter Number of Days");
+                }
+                else if(et_advance.getText().toString().trim().length()<=0){
+                    showSnackBar("Enter Advance Amount");
+                }
+                else if(et_checkin_time.getText().toString().trim().length()<=0){
+                    showSnackBar("Enter Check - In time");
                 }
                 else{
 
@@ -179,7 +228,8 @@ public class NewGuestEntry extends AppCompatActivity {
                     // guest_city=et_city.getText().toString().trim();
                      guest_dob=et_dob.getText().toString().trim();
                      guest_no=et_guest_no.getText().toString().trim();
-
+                     days=et_days.getText().toString().trim();
+                     advance=et_advance.getText().toString().trim();
                     new UploadFileToServer().execute();
 
                 }
@@ -521,7 +571,9 @@ no_of_guest:5
                 // Adding file data to http body
                 entity.addPart("photo", new FileBody(photo));
                 entity.addPart("doc_1", new FileBody(doc_1));
-                entity.addPart("doc_2", new FileBody(doc_2));
+                if(doc_2!=null) {
+                    entity.addPart("doc_2", new FileBody(doc_2));
+                }
                 entity.addPart("signature", new FileBody(signature));
 
                 // Extra parameters if you want to pass to server
@@ -550,9 +602,11 @@ no_of_guest:5
                     responseString = EntityUtils.toString(r_entity);
                     JSONObject res = new JSONObject(responseString.trim());
                     JSONObject ress=res.getJSONObject("res");
+                    JSONObject guestobj=res.getJSONObject("guest");
                      server_status= ress.optInt("status");
                     if(server_status==1) {
                         server_message = "Checkin Successful";
+                        response_guest_id=guestobj.getString("id");
                     }
                     else{
                         server_message = "Failed";
@@ -579,11 +633,18 @@ no_of_guest:5
          //   circleprogress.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.INVISIBLE);
             txtPercentage.setVisibility(View.INVISIBLE);
+            super.onPostExecute(result);
 
             Log.e("ADD GUEST", "Response from server: " + result);
-
+            if(server_status==1){
+                Docheckin(response_guest_id,room_id,hotel_id,dateto_send+" "+et_checkin_time.getText().toString().trim(),
+                        advance,days,user_id);
+            }
+            else {
+                showSnackBar("Error while Checkin . Please checkin Again");
+            }
             // showing the server response in an alert dialog
-            if(server_status==1) {
+            /*if(server_status==1) {
                 showSnackBar("Guest Checkin Done");
                // NewGuestEntry.this.finish();
                 Intent intent = new Intent(NewGuestEntry.this, Home.class);
@@ -598,10 +659,47 @@ no_of_guest:5
                 rel_progress.setVisibility(View.GONE);
 
             }
-
-            super.onPostExecute(result);
+*/
         }
 
+    }
+
+    private void Docheckin(String response_guest_id, String room_id, String hotel_id, String s, String advance, String days, String user_id) {
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setMessage("Checking In . Please wait...");
+        pd.show();
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("guest_id", response_guest_id);
+            jsonObject.put("room_id", room_id);
+            jsonObject.put("hotel_id", hotel_id);
+            jsonObject.put("checkin", s);
+            jsonObject.put("advance_amonut", advance);
+            jsonObject.put("no_of_days", days);
+            jsonObject.put("added_by", user_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        new APIManager().ModifyAPI(Constants.BASEURL + Constants.TRASANCTION, "res", jsonObject, NewGuestEntry.this, new APIManager.APIManagerInterface() {
+            @Override
+            public void onSuccess(Object resultObj) {
+                pd.dismiss();
+                Intent intent = new Intent(NewGuestEntry.this, Home.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+
+            }
+
+            @Override
+            public void onError(String error) {
+                pd.dismiss();
+                showSnackBar(error);
+            }
+        });
     }
 
 }

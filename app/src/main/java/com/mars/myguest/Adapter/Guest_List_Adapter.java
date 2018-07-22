@@ -14,8 +14,10 @@ import android.widget.TextView;
 
 import com.mars.myguest.Activity.AttachGuest;
 import com.mars.myguest.Activity.Expenses;
+import com.mars.myguest.Activity.GuestDetails;
 import com.mars.myguest.Pojo.Guest_List;
 import com.mars.myguest.R;
+import com.mars.myguest.Util.Constants;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -47,7 +49,8 @@ public class Guest_List_Adapter extends BaseAdapter {
 
     public class Holder {
         TextView guset_name,gu_mobile,g_addrss,room_price, room_no,g_intime,ad_text;
-        ImageView g_img1,g_img2,pro_img,expense;
+        ImageView g_img1,g_img2,pro_img,iv_checkout;
+        TextView expense,checkout_yime;
         LinearLayout g_img3,g_img4,g_im5,advancelin;
     }
     @Override
@@ -70,9 +73,10 @@ public class Guest_List_Adapter extends BaseAdapter {
             holder.g_img3=(LinearLayout) convertView.findViewById(R.id.g_img3);
             holder.g_img4=(LinearLayout) convertView.findViewById(R.id.g_img4);
             holder.g_im5=(LinearLayout) convertView.findViewById(R.id.g_im5);
-            holder.advancelin=(LinearLayout) convertView.findViewById(R.id.advancelin);
             holder.pro_img=(ImageView) convertView.findViewById(R.id.pro_img);
-            holder.expense=(ImageView) convertView.findViewById(R.id.expense);
+            holder.expense=(TextView) convertView.findViewById(R.id.expense);
+            holder.checkout_yime=(TextView) convertView.findViewById(R.id.checkout_yime);
+            holder.iv_checkout=(ImageView) convertView.findViewById(R.id.iv_checkout);
 
             convertView.setTag(holder);
         } else {
@@ -91,15 +95,26 @@ public class Guest_List_Adapter extends BaseAdapter {
         holder.g_im5.setTag(position);
         holder.pro_img.setTag(position);
         holder.expense.setTag(position);
-        holder.advancelin.setTag(position);
         holder.ad_text.setTag(position);
+        holder.checkout_yime.setTag(position);
+        holder.iv_checkout.setTag(position);
 
-        holder.guset_name.setText("Name:"+" "+_pos.getFirst_name()+" "+_pos.getLast_name());
+        holder.guset_name.setText("Name:"+" "+_pos.getFirst_name());
         holder.gu_mobile.setText("Mobile:"+" "+_pos.getMobile());
-        holder.g_addrss.setText("Add: "+_pos.getAddress()+","+" "+_pos.getCity());
+        holder.g_addrss.setText("Add: "+_pos.getAddress());
         holder.room_price.setText("Price: Rs. "+_pos.getPrice());
         holder.room_no.setText(_pos.getRoom_no());
-        holder.g_intime.setText("Not Given");
+        holder.ad_text.setText("Advance : Rs."+_pos.getAdvance_amonut());
+        holder.g_intime.setText(Constants.getOurDate(_pos.getCheckin_time()));
+        if(_pos.getGuest_status().contentEquals("Checkin")){
+            holder.iv_checkout.setVisibility(View.VISIBLE);
+            holder.checkout_yime.setVisibility( View.GONE);
+        }
+        else{
+            holder.iv_checkout.setVisibility(View.GONE);
+            holder.checkout_yime.setVisibility( View.VISIBLE);
+            holder.checkout_yime.setText(Constants.getOurDate((_pos.getCheckout_time())));
+        }
         if(!_pos.getPhoto().isEmpty()) {
             Picasso.with(context).load(_pos.getPhoto())
                     .resize(300,300).into(holder.pro_img);
@@ -116,6 +131,15 @@ public class Guest_List_Adapter extends BaseAdapter {
             Picasso.with(context).load(_pos.getDoc_2())
                     .resize(300,300).into(holder.g_img2);
         }
+
+        holder.g_img4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,GuestDetails.class);
+                intent.putExtra("GNAME",_pos.getFirst_name());
+                context.startActivity(intent);
+            }
+        });
 
         holder.expense.setOnClickListener(new View.OnClickListener() {
             @Override

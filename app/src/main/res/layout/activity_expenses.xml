@@ -33,6 +33,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:id="@+id/details"
         android:background="@drawable/custom_border"
         android:layout_below="@id/expensestool">
         <TextView
@@ -43,7 +44,25 @@
             android:text="Amaresh, Room - 101"
             android:textColor="@color/colorPrimaryDark"/>
     </RelativeLayout>
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Expenses "
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:id="@+id/tv_noexp"/>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/details"
+        android:id="@+id/swip_expenses"
+        android:layout_marginBottom="40dp">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:id="@+id/lv_expenses"></ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -53,10 +72,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ADD EXPENSES"
-            android:layout_centerInParent="true"
+            android:text="Total : 0 "
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:textColor="@color/white"
+            android:id="@+id/text_total"
             android:textSize="12dp"
             android:textStyle="bold"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addexpences"
+            android:background="@mipmap/ic_add_white_24dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:padding="5dp"/>
     </RelativeLayout>
 </RelativeLayout>

@@ -4,6 +4,7 @@ public class Guest_List {
 
     String guest_id, first_name, last_name, mobile, address,
             city, photo, doc_1, doc_2, created,modified,signature,room_id,room_no,price;
+    String tr_id,checkin_time,checkout_time,advance_amonut,total_amount,discount,admin_discount,no_of_days,payable_amount,guest_status;
 
     public String getRoom_id() {
         return room_id;
@@ -29,9 +30,90 @@ public class Guest_List {
         this.price = price;
     }
 
+    public String getTr_id() {
+        return tr_id;
+    }
+
+    public void setTr_id(String tr_id) {
+        this.tr_id = tr_id;
+    }
+
+    public String getCheckin_time() {
+        return checkin_time;
+    }
+
+    public void setCheckin_time(String checkin_time) {
+        this.checkin_time = checkin_time;
+    }
+
+    public String getCheckout_time() {
+        return checkout_time;
+    }
+
+    public void setCheckout_time(String checkout_time) {
+        this.checkout_time = checkout_time;
+    }
+
+    public String getAdvance_amonut() {
+        return advance_amonut;
+    }
+
+    public void setAdvance_amonut(String advance_amonut) {
+        this.advance_amonut = advance_amonut;
+    }
+
+    public String getTotal_amount() {
+        return total_amount;
+    }
+
+    public void setTotal_amount(String total_amount) {
+        this.total_amount = total_amount;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
+
+    public String getAdmin_discount() {
+        return admin_discount;
+    }
+
+    public void setAdmin_discount(String admin_discount) {
+        this.admin_discount = admin_discount;
+    }
+
+    public String getNo_of_days() {
+        return no_of_days;
+    }
+
+    public void setNo_of_days(String no_of_days) {
+        this.no_of_days = no_of_days;
+    }
+
+    public String getPayable_amount() {
+        return payable_amount;
+    }
+
+    public void setPayable_amount(String payable_amount) {
+        this.payable_amount = payable_amount;
+    }
+
+    public String getGuest_status() {
+        return guest_status;
+    }
+
+    public void setGuest_status(String guest_status) {
+        this.guest_status = guest_status;
+    }
+
     public Guest_List(String guest_id, String first_name, String last_name, String mobile, String address, String city,
                       String photo, String doc_1, String doc_2, String created, String modified, String signature, String room_id, String room_no,
-                      String price) {
+                      String price, String tr_id, String checkin_time, String checkout_time, String advance_amonut, String total_amount,
+                      String discount, String admin_discount, String no_of_days, String payable_amount, String guest_status) {
         this.guest_id=guest_id;
         this.first_name=first_name;
         this.last_name=last_name;
@@ -47,6 +129,17 @@ public class Guest_List {
         this.room_id=room_id;
         this.room_no=room_no;
         this.price=price;
+        this.tr_id=tr_id;
+        this.checkin_time=checkin_time;
+        this.checkout_time=checkout_time;
+        this.advance_amonut=advance_amonut;
+        this.total_amount=total_amount;
+        this.discount=discount;
+        this.admin_discount=admin_discount;
+        this.no_of_days=no_of_days;
+        this.payable_amount=payable_amount;
+        this.guest_status=guest_status;
+
 
 
     }
