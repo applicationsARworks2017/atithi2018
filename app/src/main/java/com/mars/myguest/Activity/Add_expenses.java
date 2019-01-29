@@ -198,10 +198,13 @@ public class Add_expenses extends AppCompatActivity {
                     Toast.makeText(Add_expenses.this, server_message, Toast.LENGTH_SHORT).show();
                     //showSnackBar(server_message);
                    // Add_expenses.this.finish();
-                    Intent intent = new Intent(Add_expenses.this, LoginActivity.class);
+                    Intent intent = new Intent(Add_expenses.this, Expenses.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    intent.putExtra("GUESTID",guest_id);
+                    intent.putExtra("GUESTNAME",guest_name);
+                    intent.putExtra("ROOMNUMBER",guest_room);
                     startActivity(intent);
                 } else {
                     showSnackBar(server_message);

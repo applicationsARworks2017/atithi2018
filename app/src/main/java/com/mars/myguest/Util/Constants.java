@@ -44,6 +44,8 @@ public class Constants {
     public static String ADD_GUEST="Guests/add.json";
     public static String GUEST_LIST="Guests/index.json";
     public static String ATTACH_GUEST="GuestDetails/add.json";
+    public static String _GUEST_EDIT="GuestTransactions/edit.json";
+    public static String ATTACH_GUEST_LIST="GuestDetails/index.json";
 
 
 

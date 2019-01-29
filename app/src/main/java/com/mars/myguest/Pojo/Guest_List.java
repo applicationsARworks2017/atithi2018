@@ -3,8 +3,9 @@ package com.mars.myguest.Pojo;
 public class Guest_List {
 
     String guest_id, first_name, last_name, mobile, address,
-            city, photo, doc_1, doc_2, created,modified,signature,room_id,room_no,price;
-    String tr_id,checkin_time,checkout_time,advance_amonut,total_amount,discount,admin_discount,no_of_days,payable_amount,guest_status;
+            city, photo, doc_1, doc_2, created,modified,signature,room_id,room_no,price, state, country;
+    String tr_id,checkin_time,checkout_time,advance_amonut,total_amount,discount,admin_discount,no_of_days,
+            payable_amount,guest_status,dob;
 
     public String getRoom_id() {
         return room_id;
@@ -110,10 +111,35 @@ public class Guest_List {
         this.guest_status = guest_status;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
     public Guest_List(String guest_id, String first_name, String last_name, String mobile, String address, String city,
                       String photo, String doc_1, String doc_2, String created, String modified, String signature, String room_id, String room_no,
                       String price, String tr_id, String checkin_time, String checkout_time, String advance_amonut, String total_amount,
-                      String discount, String admin_discount, String no_of_days, String payable_amount, String guest_status) {
+                      String discount, String admin_discount, String no_of_days, String payable_amount, String guest_status, String state,
+                      String country, String dob) {
         this.guest_id=guest_id;
         this.first_name=first_name;
         this.last_name=last_name;
@@ -139,6 +165,9 @@ public class Guest_List {
         this.no_of_days=no_of_days;
         this.payable_amount=payable_amount;
         this.guest_status=guest_status;
+        this.country=country;
+        this.state=state;
+        this.dob=dob;
 
 
 

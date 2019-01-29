@@ -73,6 +73,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="5dp"
                         android:text="Name :"
+                        android:id="@+id/tv_name"
                         android:textColor="@color/black"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -80,6 +81,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="5dp"
                         android:text="Phone :"
+                        android:id="@+id/tv_phone"
                         android:textColor="@color/black"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -87,6 +89,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="5dp"
                         android:text="DOB :"
+                        android:id="@+id/tv_dob"
                         android:textColor="@color/black"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -94,6 +97,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="5dp"
                         android:text="Address :"
+                        android:id="@+id/tv_address"
                         android:textColor="@color/black"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -125,6 +129,20 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="5dp"
+                        android:text="Signature :"
+                        android:textColor="@color/black"/>
+                    <ImageView
+                        android:id="@+id/sign"
+                        android:layout_width="100dp"
+                        android:scaleType="fitXY"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="50dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
                         android:text="Time :"
                         android:textColor="@color/black"/>
                     <TextView
@@ -137,6 +155,14 @@
                         android:layout_marginBottom="10dp"/>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="30dp"
+                android:text="VIEW ROOMIES"
+                android:id="@+id/bt_viewothers"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

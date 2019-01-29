@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:cardCornerRadius="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="120dp"
+            android:scaleType="fitXY"
+            android:layout_height="match_parent"
+            android:id="@+id/g_im" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/g_im"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/g_name"
+            android:maxLines="2"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="5dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/g_name"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:singleLine="true"
+                android:id="@+id/g_rel"
+                android:textColor="@color/colorAccent"
+                android:layout_toRightOf="@id/g_im"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/g_rel"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:singleLine="true"
+                android:text="ID proof"
+                android:padding="5dp"
+                android:textStyle="bold|italic"
+                android:id="@+id/g_doc"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_toRightOf="@id/g_im"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

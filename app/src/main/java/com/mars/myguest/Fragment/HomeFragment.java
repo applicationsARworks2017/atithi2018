@@ -309,8 +309,11 @@ public class HomeFragment extends Fragment {
                         for (int i = 0; i < splist.length(); i++) {
                             JSONObject o_list_obj = splist.getJSONObject(i);
                             JSONObject room_obj=o_list_obj.getJSONObject("room");
+                            JSONObject country_obj=o_list_obj.getJSONObject("country");
+                            JSONObject state_obj=o_list_obj.getJSONObject("state");
                             JSONArray tr_array=o_list_obj.getJSONArray("guest_transactions");
                             guest_id = o_list_obj.getString("id");
+                            String dob = o_list_obj.getString("dob");
                             first_name = o_list_obj.getString("first_name");
                             last_name = o_list_obj.getString("last_name");
                             mobile = o_list_obj.getString("mobile");
@@ -326,6 +329,8 @@ public class HomeFragment extends Fragment {
                             String room_id=room_obj.getString("id");
                             String room_no=room_obj.getString("room_no");
                             String price=room_obj.getString("price");
+                            String state=state_obj.getString("name");
+                            String country=country_obj.getString("name");
                             if(tr_array.length()>0){
                                 int j;
                                 for( j=0; j<tr_array.length();j++){
@@ -354,7 +359,7 @@ public class HomeFragment extends Fragment {
 
                             Guest_List g_list = new Guest_List(guest_id, first_name, last_name, mobile, address,
                                     city, photo, doc_1, doc_2, created,modified,signature,room_id,room_no,price
-                                    ,tr_id,checkin_time,checkout_time,advance_amonut,total_amount,discount,admin_discount,no_of_days,payable_amount,guest_status);
+                                    ,tr_id,checkin_time,checkout_time,advance_amonut,total_amount,discount,admin_discount,no_of_days,payable_amount,guest_status,state,country,dob);
                             guest_List.add(g_list);
 
                         }

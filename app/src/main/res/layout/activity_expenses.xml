@@ -10,9 +10,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/expensestool"
         android:background="@color/colorPrimary">
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="50dp"
             android:id="@+id/backex"
+
             android:layout_height="50dp">
             <ImageView
                 android:layout_width="wrap_content"
@@ -20,7 +21,7 @@
                 android:background="@mipmap/ic_arrow_back_white_24dp"
                 android:layout_gravity="center"/>
 
-        </LinearLayout>
+        </LinearLayout>-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

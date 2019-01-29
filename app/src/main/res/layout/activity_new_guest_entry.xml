@@ -370,7 +370,7 @@
                         android:layout_width="match_parent"
                         android:focusable="false"
                         android:layout_height="wrap_content"
-                        android:hint="Advance Payment" />
+                        android:hint="Checkin Time" />
                 </android.support.design.widget.TextInputLayout>
                 <Button
                     android:layout_width="match_parent"

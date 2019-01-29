@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="vertical"
+        android:id="@+id/main_lin"
+        android:background="@color/colorPrimaryDark">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amaresh, Room -202"
+            android:id="@+id/tv_guest_details"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold|italic"
+            android:textColor="@color/white"
+            android:layout_gravity="center" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_below="@id/main_lin"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_checkin_time"
+            android:textColor="@color/black"
+            android:text="Chekin time : "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No. Of Days : "
+            android:id="@+id/tv_nodays"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_expenses"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_admindiscount"
+            android:text="Admin Discount : "
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Discount : "
+            android:id="@+id/tv_discount"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black"
+            android:id="@+id/tv_room_amount"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black"
+            android:id="@+id/tv_room_advance"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Payble Amount"
+            android:textColor="@color/deeppink"
+            android:id="@+id/tv_payble_amount"
+            android:layout_marginTop="10dp"/>
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:text="Discount Request"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:id="@+id/bt_dis_req"
+            android:visibility="gone"
+            android:textColor="@color/white"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:text="Cancel"
+                android:id="@+id/bt_cancel"
+                android:background="@color/pink"
+                android:layout_gravity="center"
+                android:textColor="@color/white"/>
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:text="Checkout"
+                android:layout_marginLeft="30dp"
+                android:background="@color/green"
+                android:layout_gravity="center"
+                android:id="@+id/bt_checkout"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

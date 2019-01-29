@@ -54,11 +54,25 @@ public class Expenses extends AppCompatActivity {
         tv_noexp=(TextView)findViewById(R.id.tv_noexp);
         lv_expenses=(ListView)findViewById(R.id.lv_expenses);
         expensestool=(android.support.v7.widget.Toolbar)findViewById(R.id.expensestool);
-        backex=(LinearLayout)expensestool.findViewById(R.id.backex);
-        backex.setOnClickListener(new View.OnClickListener() {
+       // setSupportActionBar(expensestool);
+        expensestool.setNavigationIcon(R.mipmap.ic_arrow_back_white_24dp);
+        expensestool.setTitle("");
+       // backex=(LinearLayout)expensestool.findViewById(R.id.backex);
+        /*backex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });*/
+        expensestool.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // finish();
+                Intent intent = new Intent(Expenses.this, Home.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
             }
         });
 
